@@ -55,7 +55,8 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         boolean isAuthenticated = um.authenticateUser(username, password);
-//        ArrayList<User> listen = um.getAllUsers(); // VIRKER IKKE
+        ArrayList<User> listen = um.getAllUsers(); // Thomas: VIRKER NU
+        request.setAttribute("userlist", listen); //Thomas: Her har jeg tilføjet listen til 
         if(isAuthenticated){
             
 //            request.setAttribute("listOfUser", um.getAllUsers());

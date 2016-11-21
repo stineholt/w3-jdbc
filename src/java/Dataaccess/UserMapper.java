@@ -24,7 +24,7 @@ public class UserMapper {
     public ArrayList<User> getAllUsers(){
     ////////// STINES FORSØG
         ArrayList<User> listOfUser = new ArrayList<User>();
-        User selectedUser = null;
+        
         try{
             String sql = "SELECT * FROM usertable";
             Connection con = DB.getConnection();
@@ -33,6 +33,7 @@ public class UserMapper {
             ResultSet rs = pstmt.executeQuery();
             
             while (rs.next()) {
+                User selectedUser = new User(); //Thomas: her har jeg lavet et objekt (efter at have tilføjet en default konstruktør til User klassen
                 selectedUser.setId(rs.getInt("id"));
                 selectedUser.setUsername(rs.getString("username"));
                 selectedUser.setPassword(rs.getString("password"));
@@ -74,10 +75,13 @@ public class UserMapper {
     
     public static void main(String[] args) {
         UserMapper um = new UserMapper();
-        boolean isAuthenticated = um.authenticateUser("testuser", "password123");
+        boolean isAuthenticated = um.authenticateUser("testuser", "tst1234");
         if(isAuthenticated)
             System.out.println("Yeas det virker");
         else
             System.out.println("Oh no access");
+        for (User user : um.getAllUsers()) {
+            System.out.println(user.getUsername());
+        }
     }
 }
